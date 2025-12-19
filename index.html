@@ -31,7 +31,6 @@
         const { useState, useEffect } = React;
 
         // --- ICONS (SVG Components) ---
-        // We define these here so you don't need to install anything
         const Icon = ({ path, className }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 {path}
@@ -214,11 +213,13 @@
                 <p className="text-xs md:text-sm font-light mt-1 opacity-90">"And when I am ill, it is He who cures me"</p>
               </div>
 
-              {/* HEADER */}
+              {/* HEADER - Updated Layout for better spacing */}
               <header className="bg-white shadow-md sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-                  <div className="flex items-start gap-4 cursor-pointer" onClick={goHome}>
-                    <div className="hidden sm:block -mt-2">
+                <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center gap-4">
+                  
+                  {/* LEFT: Logo & Title (Fixed width behavior or flex-shrink) */}
+                  <div className="flex items-start gap-4 cursor-pointer flex-shrink-1" onClick={goHome}>
+                    <div className="hidden sm:block -mt-2 flex-shrink-0">
                       <img 
                         src={images.logo} 
                         alt="Prime Emergency Center Logo" 
@@ -231,29 +232,32 @@
                         }}
                       />
                     </div>
-                    <div>
-                      <h1 style={{ color: colors.primary }} className="text-3xl md:text-5xl font-extrabold uppercase leading-none tracking-tight">
+                    <div className="text-left">
+                      <h1 style={{ color: colors.primary }} className="text-2xl md:text-3xl lg:text-4xl font-extrabold uppercase leading-none tracking-tight">
                         Prime Emergency Center
                       </h1>
-                      <h2 style={{ color: '#d32f2f' }} className="text-xl md:text-3xl font-bold mt-1">& Maternity Home</h2>
-                      <p style={{ ...urduStyle, color: colors.primary }} className="text-lg md:text-2xl mt-1 font-bold">پرائم ایمرجنسی سنٹر اینڈ میٹرنٹی ہوم</p>
+                      <h2 style={{ color: '#d32f2f' }} className="text-lg md:text-xl lg:text-2xl font-bold mt-1">& Maternity Home</h2>
+                      <p style={{ ...urduStyle, color: colors.primary }} className="text-base md:text-lg lg:text-xl mt-1 font-bold">پرائم ایمرجنسی سنٹر اینڈ میٹرنٹی ہوم</p>
                     </div>
                   </div>
 
-                  <nav className="hidden xl:flex gap-6 font-medium text-slate-600 items-center">
+                  {/* MIDDLE: Nav (Hidden on smaller screens) */}
+                  <nav className="hidden xl:flex gap-6 font-medium text-slate-600 items-center flex-shrink-0">
                     <button onClick={goHome} className="hover:text-[#0b5e35] transition">Home</button>
                     <button onClick={() => {goHome(); setTimeout(()=>document.getElementById('services')?.scrollIntoView(), 100)}} className="hover:text-[#0b5e35] transition">Departments</button>
                     <button onClick={() => {goHome(); setTimeout(()=>document.getElementById('diagnostics')?.scrollIntoView(), 100)}} className="hover:text-[#0b5e35] transition">Diagnostics</button>
                     <button onClick={() => {goHome(); setTimeout(()=>document.getElementById('contact')?.scrollIntoView(), 100)}} className="hover:text-[#0b5e35] transition">Contact</button>
                   </nav>
 
-                  <div className="hidden lg:block">
-                    <a href="tel:03195338533" style={{ backgroundColor: colors.accent }} className="text-white px-6 py-3 rounded-full font-bold transition shadow-lg hover:brightness-110 flex items-center gap-2 text-lg">
+                  {/* RIGHT: Button (Ensured to be on the right) */}
+                  <div className="hidden lg:block flex-shrink-0">
+                    <a href="tel:03195338533" style={{ backgroundColor: colors.accent }} className="text-white px-6 py-3 rounded-full font-bold transition shadow-lg hover:brightness-110 flex items-center gap-2 text-lg whitespace-nowrap">
                       <Phone className="w-5 h-5" /> Call for Appointment
                     </a>
                   </div>
 
-                  <button className="lg:hidden text-slate-800" onClick={toggleMenu}>
+                  {/* Mobile Toggle */}
+                  <button className="lg:hidden text-slate-800 flex-shrink-0" onClick={toggleMenu}>
                     {isMenuOpen ? <XIcon className="w-8 h-8" /> : <MenuIcon className="w-8 h-8" />}
                   </button>
                 </div>
@@ -356,7 +360,7 @@
               ) : (
                 // HOME PAGE
                 <>
-                  {/* Hero Section */}
+                  {/* Hero Section - UPDATED: LEFT ALIGNED CONTENT */}
                   <section id="home" className="relative h-auto md:h-[600px] flex items-center bg-slate-100 py-12 md:py-0">
                     <div className="absolute inset-0 z-0">
                       <img src={images.hero} alt="Hospital" className="w-full h-full object-cover" />
@@ -364,9 +368,11 @@
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 relative z-10 text-white w-full">
-                      <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                        <div className="flex-shrink-0 text-center animate-in slide-in-from-left duration-700">
-                           <div style={{ borderColor: colors.highlight }} className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 overflow-hidden shadow-2xl mx-auto mb-4 bg-white">
+                      <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
+                        
+                        {/* CEO Widget (Left Aligned) */}
+                        <div className="flex-shrink-0 text-left animate-in slide-in-from-left duration-700">
+                           <div style={{ borderColor: colors.highlight }} className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 overflow-hidden shadow-2xl mb-4 bg-white">
                              <img src={images.ceo} alt="Dr. Asif Nawaz" className="w-full h-full object-contain" />
                            </div>
                            <div className="bg-black/30 backdrop-blur-sm rounded-lg p-3 inline-block border border-white/20">
@@ -375,7 +381,8 @@
                            </div>
                         </div>
 
-                        <div className="text-center md:text-left max-w-2xl">
+                        {/* Text (Left Aligned) */}
+                        <div className="text-left max-w-2xl">
                           <span style={{ backgroundColor: colors.highlight, color: 'black' }} className="px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider mb-4 inline-block shadow-md">
                             24/7 Emergency Services
                           </span>
@@ -388,7 +395,7 @@
                           <p className="text-lg text-slate-100 mb-8 leading-relaxed font-medium drop-shadow">
                             Expert Doctors | Modern Facilities | Emergency Services
                           </p>
-                          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                          <div className="flex flex-col sm:flex-row gap-4 justify-start">
                             <a href="tel:03195338533" style={{ backgroundColor: colors.accent }} className="text-white px-8 py-4 rounded-lg font-bold text-center transition flex items-center justify-center gap-2 hover:scale-105 transform duration-200 text-lg shadow-xl hover:shadow-2xl">
                               <Phone className="w-6 h-6" /> Call Emergency: 0319-5338533
                             </a>
